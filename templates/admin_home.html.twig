@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+{% block page_title %}My Open Letter Admin Panel{% endblock %}
+{% block content %}
+   <h1>My Open Letter Admin Panel</h1>
+   <p><a href="{{ base_url }}{{ admin_path }}/add">Add Letter</a></p>
+   {% if letters %}
+      <table>
+         <thead>
+            <tr>
+               <th>From</th>
+               <th>To</th>
+               <th>Date</th>
+               <th>IP</th>
+               <th colspan="2">Actions</th>
+            </tr>
+         </thead>
+         <tbody>
+ 
+            {% for letter in letters %}
+               <tr>
+                  <td>{{ letter.from }}</td>
+                  <td>{{ letter.to }}</td>
+                  <td>{{ letter.timestamp|date('jS F Y') }}</td>
+                  <td>{{ letter.ip }}</td>
+                  <td><a href="{{ base_url }}{{ admin_path }}/edit/{{ letter.id }}">Edit</a></td>
+                  <td><a href="{{ base_url }}{{ admin_path }}/delete/{{ letter.id }}" onclick="return confirm('WARNING: Are you sure you want to delete the letter?!');">Delete</a></td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   {% else %}
+      <p>There are currently no letters.</p>
+   {% endif %}
+{% endblock %}

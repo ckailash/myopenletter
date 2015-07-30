@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+{% block page_title %}{{ action_name }} Article{% endblock %}
+{% block content %}
+{% if action_name == 'Add' %}	
+	{% include 'admin_add.html.twig' %}
+{% elseif action_name == 'Edit' %}	
+	{% include 'admin_edit.html.twig' %}
+{% endif %}	
+{% endblock %}

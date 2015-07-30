@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+{% block page_title %}Edit Open Letter from {{ letter.from }} to {{ letter.to }}{% endblock %}
+{% block content %}
+<div id="coreContent" class="hfeed"> 
+	<div class="post">
+		<div class="postContent"> 
+			<div class="entry-content"> 
+				<div id="specialmsg">
+					You can edit your letter at this address: <b><a href="{{ action_url }}">{{ action_url }}</a></b><br><br>
+					<b><font color="red">Please keep this address private as anyone who knows this can edit your letter!</font></b><br>
+					Your letter is open for all to read at this address: <b><a href="{{ base_url }}{{ letter.id }}/from/{{ letter.from_slug }}/to/{{ letter.to_slug }}">{{ base_url }}{{ letter.id }}/from/{{ letter.from_slug }}/to/{{ letter.to_slug }}</a></b><br><br>
+					Share: 
+					<!-- AddToAny BEGIN -->
+					<div class="a2a_kit a2a_default_style">
+					<a class="a2a_dd" href="http://www.addtoany.com/share_save">Share</a>
+					<span class="a2a_divider"></span>
+					<a class="a2a_button_facebook"></a>
+					<a class="a2a_button_twitter"></a>
+					<a class="a2a_button_email"></a>
+					</div>
+					<script type="text/javascript" src="http://static.addtoany.com/menu/page.js"></script>
+					<!-- AddToAny END -->
+				</div>
+			</div>
+		</div>
+	</div>	
+<form action="{{ action_url }}" method="post">
+   {% if errors %}
+	<font color="red">{{ errors|raw }}</font>
+	{% endif %}
+   <p>
+      <label for="from">From: </label><br />
+      <input type="text" name="from" value="{{ letter.from }}" id="from" class="longinput"/>
+   </p>
+   <p>
+      <label for="to">To: </label><br />
+      <input type="text" name="to" value="{{ letter.to }}" id="to" class="longinput"/>
+   </p> 
+   <p>
+      <label for="content">Content: </label><br />
+      <textarea name="content" id="content" class="ckeditor" rows="10" cols="20">{{ letter.content }}</textarea>
+   </p>
+   <p>
+		<label>Comments:</label><br />
+		<input type="radio" name="comments" value="1" id="comments_on" {% if letter.comments == "1" %}checked{% endif %}><label for="comments_on">On</label>
+		<input type="radio" name="comments" value="0" id="comments_off" {% if letter.comments == "0" %}checked{% endif %}><label for="comments_off">Off</label>
+   </p>
+   <p>
+      <center><input type="submit" value="Save and Continue Editing" /><input type="button" value="View Letter" onclick='javascript:openInNewWindow("{{ base_url }}{{ letter.id }}/from/{{ letter.from_slug }}/to/{{ letter.to_slug }}")'><input type="button" value="Delete Letter" onclick='javascript:redirect("{{ base_url }}delete/{{ edit_slug }}")'></center>
+   </p>
+</form>
+<hr>
+<script type="text/javascript">
+function openInNewWindow(url) {
+	var newWindow = window.open(url, '_blank');
+	newWindow.focus();
+	return false;
+}
+function redirect(url) {
+	window.location.href = url;
+}
+</script>
+<h3>Preview of your Letter</h3>
+<div class="post hentry">
+	<h5 class="postDate"><abbr class="published">{{ letter.timestamp|date('F jS, Y') }}</abbr></h5>        
+	<div class="postContent"> 
+		<h3 class="entry-title"><a href="{{ base_url }}{{ letter.id }}/from/{{ letter.from_slug }}/to/{{ letter.to_slug }}" rel="bookmark">Open Letter from {{ letter.from }} to {{ letter.to }}</a></h3> 
+		<div class="entry-content"> 
+			<p>{{ letter.content|raw }}</p>
+		</div> 
+	</div>
+</div>
+</div>
+{% endblock %}
+{% block ckeditor %}
+<script async type="text/javascript" src="{{ asset_url }}ckeditor/ckeditor.js"></script>
+{% endblock %}

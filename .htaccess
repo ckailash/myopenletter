@@ -1,0 +1,31 @@
+RewriteEngine On
+
+# Use PHP 5.3
+#Action application/x-hg-php53 /cgi-sys/php53
+#AddHandler application/x-hg-php53 .php 
+
+# Some hosts may require you to use the `RewriteBase` directive.
+# If you need to use the `RewriteBase` directive, it should be the
+# absolute physical path to the directory that contains this htaccess file.
+#
+# RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+#disable access to dot files and directories!
+RedirectMatch 404 /\..*$
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 30 minutes" 
+ExpiresByType image/gif "access plus 60 days"
+ExpiresByType image/jpg "access plus 60 days"
+ExpiresByType image/png "access plus 60 days" 
+ExpiresByType application/x-javascript "access plus 60 days"
+ExpiresByType text/css "access plus 60 days"
+ExpiresByType image/x-icon "access plus 360 days"
+</IfModule>

@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+{% block page_title %}My Open Letter{% endblock %}
+{% block content %}
+	<div id="coreContent" class="hfeed"> 
+		<div class="mainquote"> 
+			<p><blockquote><strong>My Open Letter lets you write an open letter to any one you want. That was kind of self-explanatory, wasn't it?</blockquote></strong></p>
+		</div>
+<form action="{{ action_url }}" method="post">
+	{% if errors %}
+		<center><font color="red">{{ errors|raw }}</font></center>
+	{% endif %}
+	{% if msg %}
+		<center><font color="green">{{ msg|raw }}</font></center>
+	{% endif %}
+   <p>
+      <label for="from">From:</label><br />
+      <input type="text" name="from" value="{{ posted_from|default('Your Name') }}" id="from" class="longinput" onfocus="clearInput(this)"/>
+   </p>
+   
+   <p>
+      <label for="to">To:</label><br />
+      <input type="text" name="to" value="{{ posted_to|default("Name of the person you're addressing to") }}" id="to" class="longinput" onfocus="clearInput(this)"/>
+   </p> 
+   
+   <p>
+      <label for="content">Letter Content:</label><br />
+      <textarea name="content" id="content" class="ckeditor" rows="20" cols="95">{{ posted_content|default('') }}</textarea>
+   </p>
+   <p>
+		<label>Comments:</label><br />
+		<span>Let other people comment on your letter?</span>
+		<input type="radio" name="comments" value="1" id="comments_on" {% if posted_comments == "1" %}checked{% endif %} checked><label for="comments_on">Yes</label>
+		<input type="radio" name="comments" value="0" id="comments_off" {% if posted_comments == "0" %}checked{% endif %}><label for="comments_off">No</label>
+   </p>
+   <p>
+		<script type="text/javascript">
+		 var RecaptchaOptions = {
+			theme : 'clean'
+		 };
+		 </script>
+		<label>Enter the text in the image below</label> 
+		<center>{{ recaptcha_html|raw }}</center>
+   </p>
+   <p>
+      <center><input type="submit" value="Publish Letter" /></center>
+   </p>
+</form>
+</div>
+{% endblock %}
+{% block ckeditor %}
+<script async type="text/javascript" src="{{ asset_url }}ckeditor/ckeditor.js"></script>
+<script language="javascript"> 
+function clearInput(e){ 
+if(e.value=="Your Name" || e.value=="Name of the person you're addressing to")
+	e.value=""; 
+} 
+</script>
+{% endblock %}

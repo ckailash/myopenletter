@@ -1,0 +1,10 @@
+.ftpquota
+google*
+/sitemap.*
+templates/cache/*
+/vendor
+composer.phar
+composer.lock
+.env
+.idea
+.DS_Store

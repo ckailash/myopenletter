@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://myopenletter.in/sitemap.xml.gz
+Sitemap: http://myopenletter.in/sitemap.xml.gz.gz

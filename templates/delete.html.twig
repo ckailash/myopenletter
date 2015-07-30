@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% block page_title %}Edit Open Letter from {{ letter.from }} to {{ letter.to }}{% endblock %}
+{% block content %}
+<div id="coreContent" class="hfeed"> 
+	<div class="post">
+		<div class="postContent"> 
+			<h3 class="entry-title">Delete Open letter from {{ letter.from }} to {{ letter.to }}?</h3>
+		</div>
+	</div>
+<form action="{{ action_url }}" method="post">
+<p><center><input type="submit" value="Yes" name="action"><input type="submit" value="No" name="action"></center>
+</form>
+</div>
+{% endblock %}

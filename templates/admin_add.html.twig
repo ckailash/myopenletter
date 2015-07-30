@@ -1,0 +1,36 @@
+<form action="{{ action_url }}" method="post">
+	{% if errors %}
+		<center><font color="red">{{ errors|raw }}</font></center>
+	{% endif %}
+   <p>
+      <label for="from">From: (Your Name)</label><br />
+      <input type="text" name="from" value="{{ posted_from|default('') }}" id="from" class="longinput"/>
+   </p>
+   
+   <p>
+      <label for="to">To: (Name of the person you're addressing to)</label><br />
+      <input type="text" name="to" value="{{ posted_to|default('') }}" id="to" class="longinput"/>
+   </p> 
+   
+   <p>
+      <label for="content">Content: </label><br />
+      <textarea name="content" id="content" class="ckeditor" rows="10" cols="20">{{ posted_content|default('') }}</textarea>
+   </p>
+   <p>
+		<label>Comments:</label><br />
+		<input type="radio" name="comments" value="1" id="comments_on" {% if posted_comments == "1" %}checked{% endif %} checked><label for="comments_on">On</label>
+		<input type="radio" name="comments" value="0" id="comments_off" {% if posted_comments == "0" %}checked{% endif %}><label for="comments_off">Off</label>
+   </p>
+   <p>
+		<script type="text/javascript">
+		 var RecaptchaOptions = {
+			theme : 'white'
+		 };
+		 </script>
+		<center>{{ recaptcha_html|raw }}</center>
+   </p>
+   <p>
+      <center><input type="submit" value="{{ action_name }} Letter" /></center>
+   </p>
+</form>
+</div>
