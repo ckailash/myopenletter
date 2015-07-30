@@ -5,6 +5,6 @@ templates/cache/*
 /vendor
 composer.phar
 composer.lock
-.env
+/.env
 .idea
 .DS_Store

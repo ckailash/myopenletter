@@ -14,6 +14,11 @@ There's also some code to generate a sitemap to make it SEO friendly. This URL i
 
 It also uses a simple ORM called Idiorm along with an active record library called Paris
 
+##Frameworks
+
+* Slim Framework
+* Idiorm (ORM) & Paris (active record)
+
 ##Deployment
 
 1. Checkout the repository
